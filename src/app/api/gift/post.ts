@@ -1,5 +1,6 @@
-import { editPoints, getUserByEmail } from "@/model/user.model";
 import { getServerSession } from "next-auth";
+
+import { editPoints, getUserByEmail } from "@/model/user.model";
 
 export async function Gift(request: Request) {
     try {

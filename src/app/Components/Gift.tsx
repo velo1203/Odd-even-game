@@ -1,9 +1,10 @@
 "use client";
 
-import { toast } from "react-toastify";
-import styles from "./Gift.module.css";
-import { useState } from "react";
 import axios from "axios";
+import { useState } from "react";
+import { toast } from "react-toastify";
+
+import styles from "./Gift.module.css";
 
 interface User {
     id: string;

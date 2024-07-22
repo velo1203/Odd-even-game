@@ -1,6 +1,7 @@
-import { createUser, getUserByEmail } from "@/model/user.model";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+
+import { createUser, getUserByEmail } from "@/model/user.model";
 
 const handler = NextAuth({
     providers: [

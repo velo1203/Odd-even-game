@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
-import styles from "./Users.module.css";
 import axios from "axios";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
+import styles from "./Users.module.css";
+
 export default function Users() {
     const [users, setUsers] = useState([]);
 

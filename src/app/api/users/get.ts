@@ -1,6 +1,7 @@
 // API route
-import { SearchUser } from "@/model/user.model";
 import { NextResponse } from "next/server";
+
+import { SearchUser } from "@/model/user.model";
 
 export async function GetUsers(req: Request) {
     const searchParams = new URL(req.url).searchParams;
