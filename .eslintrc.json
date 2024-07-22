@@ -18,6 +18,7 @@
     "react-hooks"
   ],
   "rules": {
+    "linebreak-style": 0,
     "no-useless-catch": "off",
     "object-curly-spacing": ["error", "always"],
     "react/prop-types": "off",
@@ -26,10 +27,6 @@
     "indent": [
       "error",
       4
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
     ],
     "quotes": [
       "error",
