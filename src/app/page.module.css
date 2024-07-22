@@ -11,12 +11,6 @@
         font-size: 1.2rem;
     }
 }
-.NumberInput::-webkit-outer-spin-button,
-.NumberInput::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
 .background {
     padding: 20px;
     border-radius: 5px;

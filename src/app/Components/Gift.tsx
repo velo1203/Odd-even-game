@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 
 import styles from "./Gift.module.css";
@@ -22,7 +22,8 @@ export default function Gift({ setUserPoints }: GiftProps) {
     const [users, setUsers] = useState<User[]>([]);
     const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
-    const onSearch = async () => {
+    const onSearch = async (event: React.FormEvent) => {
+        event.preventDefault(); // 폼 제출 시 페이지 리로드 방지
         try {
             const res = await fetch(`/api/users?user=${target}`);
             const data = await res.json();
@@ -36,7 +37,8 @@ export default function Gift({ setUserPoints }: GiftProps) {
         }
     };
 
-    const onGift = async () => {
+    const onGift = async (event: React.FormEvent) => {
+        event.preventDefault(); // 폼 제출 시 페이지 리로드 방지
         if (!selectedUser) {
             toast.error("유저를 선택해주세요");
             return;
@@ -84,28 +86,28 @@ export default function Gift({ setUserPoints }: GiftProps) {
                         ))}
                     </ul>
                 </div>
-                <div className={styles.box}>
+                <form onSubmit={onSearch} className={styles.box}>
                     <input
                         onChange={(e) => setTarget(e.target.value)}
                         type="text"
                         className={styles.numberInput}
                         placeholder="유저 이름을 입력하세요"
                     />
-                    <button onClick={onSearch} className={styles.button}>
+                    <button type="submit" className={styles.button}>
                         검색
                     </button>
-                </div>
-                <div className={styles.box}>
+                </form>
+                <form onSubmit={onGift} className={styles.box}>
                     <input
                         onChange={(e) => setNumber(Number(e.target.value))}
                         type="number"
                         className={styles.numberInput}
                         placeholder="숫자를 입력하세요"
                     />
-                </div>
-                <button onClick={onGift} className={styles.button}>
-                    선물하기
-                </button>
+                    <button type="submit" className={styles.button}>
+                        선물하기
+                    </button>
+                </form>
             </div>
         </div>
     );
