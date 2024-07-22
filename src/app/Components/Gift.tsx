@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import Image from "next/image";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 
@@ -10,6 +11,7 @@ interface User {
     id: string;
     name: string;
     email: string;
+    picture: string;
 }
 
 interface GiftProps {
@@ -81,7 +83,13 @@ export default function Gift({ setUserPoints }: GiftProps) {
                                         : ""
                                 }
                             >
-                                {user.name}
+                                <Image
+                                    src={user.picture}
+                                    alt=""
+                                    width={25}
+                                    height={25}
+                                />
+                                <p>{user.name}</p>
                             </li>
                         ))}
                     </ul>
