@@ -45,7 +45,7 @@ export default function Home() {
     return (
         <main className={styles.main}>
             <PopupWrapper isOpen={isPopupOpen} onClose={closePopup}>
-                <Gift />
+                <Gift setUserPoints={setUserPoints} />
             </PopupWrapper>
             <div className={styles.section}>
                 {user && (

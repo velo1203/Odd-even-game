@@ -32,7 +32,7 @@ export default function Users() {
                 <table className={styles.table}>
                     <thead>
                         <tr>
-                            <th>이미지</th>
+                            <th></th>
                             <th>이름</th>
                             <th>개수</th>
                         </tr>
