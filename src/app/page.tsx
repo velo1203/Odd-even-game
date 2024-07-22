@@ -25,7 +25,7 @@ export default function Home() {
         });
     }, [userPoints]);
 
-    const handleGame = (mode: "odd" | "even") => () => {
+    const handleGame = (mode: 0 | 1) => () => {
         axios
             .post("api/points", { mode, number })
             .then((res) => {
@@ -73,7 +73,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div className={styles.container}>
-                        <button onClick={handleGame("odd")}>홀</button>
+                        <button onClick={handleGame(1)}>홀</button>
                         <div className={styles.container}>
                             <input
                                 type="number"
@@ -84,7 +84,7 @@ export default function Home() {
                             />
                             <p>개 배팅</p>
                         </div>
-                        <button onClick={handleGame("even")}>짝</button>
+                        <button onClick={handleGame(0)}>짝</button>
                     </div>
                 </div>
             </div>
