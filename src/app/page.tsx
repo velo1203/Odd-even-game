@@ -55,6 +55,7 @@ export default function Home() {
                             <p>
                                 <span>{userPoints}</span>개 보유
                             </p>
+                            <button onClick={openPopup}>선물</button>
                             <button
                                 onClick={() => {
                                     signOut();
@@ -62,7 +63,6 @@ export default function Home() {
                             >
                                 로그아웃
                             </button>
-                            <button onClick={openPopup}>선물</button>
                         </div>
                     </div>
                 )}
