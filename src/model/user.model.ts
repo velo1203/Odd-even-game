@@ -49,7 +49,7 @@ export async function getTop5Users() {
             orderBy: {
                 points: "desc",
             },
-            take: 5,
+            take: 10,
             select: {
                 name: true,
                 picture: true,

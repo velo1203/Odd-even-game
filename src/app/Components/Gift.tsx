@@ -61,16 +61,11 @@ export default function Gift({ setUserPoints }: GiftProps) {
         <div className={styles.main}>
             <h1>선물주기</h1>
             <div className={styles.container}>
-                {selectedUser?.name && <h1>{selectedUser.name}</h1>}
-                <div className={styles.box}>
-                    <input
-                        onChange={(e) => setTarget(e.target.value)}
-                        type="text"
-                        className={styles.NumberInput}
-                        placeholder="유저 이름을 입력하세요"
-                    />
-                    <button onClick={onSearch}>검색</button>
-                </div>
+                {selectedUser?.name && (
+                    <h2>
+                        <span>{selectedUser.name}</span> 선택됨
+                    </h2>
+                )}
                 <div className={styles.box}>
                     <ul className={styles.userList}>
                         {users.map((user) => (
@@ -89,15 +84,27 @@ export default function Gift({ setUserPoints }: GiftProps) {
                     </ul>
                 </div>
                 <div className={styles.box}>
-                    <p>개수</p>
+                    <input
+                        onChange={(e) => setTarget(e.target.value)}
+                        type="text"
+                        className={styles.numberInput}
+                        placeholder="유저 이름을 입력하세요"
+                    />
+                    <button onClick={onSearch} className={styles.button}>
+                        검색
+                    </button>
+                </div>
+                <div className={styles.box}>
                     <input
                         onChange={(e) => setNumber(Number(e.target.value))}
-                        type="text"
-                        className={styles.NumberInput}
+                        type="number"
+                        className={styles.numberInput}
                         placeholder="숫자를 입력하세요"
                     />
                 </div>
-                <button onClick={onGift}>선물하기</button>
+                <button onClick={onGift} className={styles.button}>
+                    선물하기
+                </button>
             </div>
         </div>
     );

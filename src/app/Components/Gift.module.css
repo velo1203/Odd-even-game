@@ -1,45 +1,74 @@
 .main {
-    & h1 {
-        font-size: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: white;
+}
+
+.main h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.container h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    & span {
+        color: goldenrod;
     }
 }
 
-.box {
-    margin: 5px;
+.container {
     display: flex;
+    flex-direction: column;
     gap: 20px;
-    align-items: center;
-    & p {
-        width: 40px;
-        font-weight: bold;
-    }
-    & input {
-        width: 100%;
-    }
+    width: 100%;
+    max-width: 400px;
 }
-.NumberInput {
+
+.box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.numberInput {
     border: 2px solid #dddddd5c;
     color: white;
     border-radius: 3px;
     transition: all 0.2s;
-
     padding: 10px;
     font-size: 1rem;
     width: 100%;
     background-color: #2c2c2c;
-    transition: border-color 0.3s;
     outline: none;
-    &:focus {
-        border-color: white;
-    }
 }
-.container {
-    display: flex;
+
+.numberInput:focus {
+    border-color: white;
+}
+
+.userList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.userList li {
     padding: 10px;
-    gap: 10px;
-    flex-direction: column;
-    & button {
-        margin-top: 25px;
-        font-size: 1rem;
-    }
+    background-color: #2c2c2c;
+    border-radius: 3px;
+    margin-top: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.userList li:hover {
+    background-color: #3a3a3a;
+}
+
+.selected {
+    background-color: #007bff;
+    color: white;
 }
