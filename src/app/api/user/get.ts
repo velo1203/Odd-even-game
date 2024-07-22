@@ -8,7 +8,7 @@ export async function GetUserInfo() {
     if (!session) {
         return NextResponse.json({ error: "Not authorized" }, { status: 401 });
     }
-    console.log(session);
+
     const user = await getUserByEmail(session.user.email);
     return NextResponse.json(user);
 }

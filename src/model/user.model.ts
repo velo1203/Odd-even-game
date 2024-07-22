@@ -42,3 +42,22 @@ export async function editPoints(email: string, points: number) {
         throw err;
     }
 }
+
+export async function getTop5Users() {
+    try {
+        const users = await prisma.user.findMany({
+            orderBy: {
+                points: "desc",
+            },
+            take: 5,
+            select: {
+                name: true,
+                picture: true,
+                points: true,
+            },
+        });
+        return users;
+    } catch (err) {
+        throw err;
+    }
+}
