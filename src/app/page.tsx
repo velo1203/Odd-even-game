@@ -1,13 +1,14 @@
 "use client";
 
-import styles from "./page.module.css";
-import Users from "./Components/Users";
-import { useEffect, useState } from "react";
-import PopupWrapper from "./Components/PopupWrapper";
-import Gift from "./Components/Gift";
 import axios from "axios";
-import { toast } from "react-toastify";
 import { signOut } from "next-auth/react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
+import Gift from "./Components/Gift";
+import PopupWrapper from "./Components/PopupWrapper";
+import Users from "./Components/Users";
+import styles from "./page.module.css";
 
 export default function Home() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);

@@ -76,3 +76,18 @@ export async function SearchUser(query: string) {
         throw err;
     }
 }
+
+export async function GetUserUnder10() {
+    try {
+        const users = await prisma.user.findMany({
+            where: {
+                points: {
+                    lt: 10
+                },
+            },
+        });
+        return users;
+    } catch (err) {
+        throw err;
+    }
+}

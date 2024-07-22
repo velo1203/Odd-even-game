@@ -1,7 +1,8 @@
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+
 import { getUserByEmail } from "@/model/user.model";
 
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
 
 export async function GetUserInfo() {
     const session: any = await getServerSession();
