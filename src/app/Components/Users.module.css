@@ -30,6 +30,7 @@
     }
     & td:first-child {
         text-align: center;
+        padding: 5px;
     }
 
     & td {
