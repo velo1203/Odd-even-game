@@ -26,3 +26,19 @@ export async function getUserByEmail(email: string) {
         throw err;
     }
 }
+
+export async function editPoints(email: string, points: number) {
+    try {
+        const user = await prisma.user.update({
+            where: {
+                email: email,
+            },
+            data: {
+                points: points,
+            },
+        });
+        return user;
+    } catch (err) {
+        throw err;
+    }
+}
