@@ -50,20 +50,18 @@ export default function Home() {
             <div className={styles.section}>
                 {user && (
                     <div className={styles.infomation}>
-                        <div>
-                            <h1>{user.name}님</h1>
-                            <p>
-                                <span>{userPoints}</span>개 보유
-                            </p>
-                            <button onClick={openPopup}>선물</button>
-                            <button
-                                onClick={() => {
-                                    signOut();
-                                }}
-                            >
-                                로그아웃
-                            </button>
-                        </div>
+                        <h1>{user.name}님</h1>
+                        <p>
+                            <span>{userPoints}</span>개 보유
+                        </p>
+                        <button onClick={openPopup}>선물</button>
+                        <button
+                            onClick={() => {
+                                signOut();
+                            }}
+                        >
+                            로그아웃
+                        </button>
                     </div>
                 )}
 

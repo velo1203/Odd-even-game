@@ -39,14 +39,10 @@
 
 .infomation {
     display: flex;
-    flex-direction: column;
+    gap: 15px;
+    align-items: center;
     color: white;
     margin-bottom: 5px;
-    & > div {
-        display: flex;
-        gap: 15px;
-        align-items: center;
-    }
     & h1 {
         font-size: 1.5rem;
         font-weight: bold;
