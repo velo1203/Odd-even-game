@@ -1,0 +1,40 @@
+.tableContainer {
+    width: 60%;
+    margin: 0 auto;
+    padding: 25px;
+}
+
+.title {
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.table {
+    color: white;
+    border-collapse: collapse;
+    width: 100%;
+    & th {
+        border: 1px solid white;
+        background-color: rgb(33, 33, 33);
+        padding: 10px;
+    }
+    & th:first-child {
+        width: 60px;
+        padding: 10px;
+    }
+    & td:first-child {
+        text-align: center;
+    }
+
+    & td {
+        padding: 10px;
+        border: 1px solid white;
+        font-weight: bold;
+    }
+}
