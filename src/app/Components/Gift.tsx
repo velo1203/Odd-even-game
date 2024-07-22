@@ -32,7 +32,7 @@ export default function Gift({ setUserPoints }: GiftProps) {
                 setUsers(data);
             }
         } catch (error) {
-            toast.error("An error occurred while fetching users.");
+            toast.error("검색 할 수 없습니다.");
         }
     };
 
@@ -54,7 +54,7 @@ export default function Gift({ setUserPoints }: GiftProps) {
                 toast.success(res.data.message);
             }
         } catch (error) {
-            toast.error("An error occurred while gifting points.");
+            toast.error("선물을 보낼 수 없습니다.");
         }
     };
 
