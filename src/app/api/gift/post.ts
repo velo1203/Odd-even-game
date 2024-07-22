@@ -9,7 +9,12 @@ export async function Gift(request: Request) {
 
         const quantity = res.quantity;
         const email = res.email;
-
+        if (email == session.user.email) {
+            return new Response(
+                JSON.stringify({ error: "자신에게 선물할 수 없습니다" }),
+                { status: 401 }
+            );
+        }
         if (!session || !session.user || !session.user.email) {
             return new Response(
                 JSON.stringify({ error: "유저가 존재하지 않습니다" }),
