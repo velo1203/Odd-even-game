@@ -27,8 +27,9 @@ export async function PostGame(request: Request) {
     if (res.number > user.points) {
         return Response.json({ error: "개수를 줄여주세요" }, { status: 401 });
     }
-    var result;
-    var newPoints;
+
+    let result;
+    let newPoints;
     const randomNumber = generateRandomNumber();
     if (res.mode === "even") {
         if (randomNumber % 2 === 0) {
