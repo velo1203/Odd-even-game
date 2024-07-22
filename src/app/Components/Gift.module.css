@@ -14,23 +14,25 @@
         font-weight: bold;
     }
     & input {
-        border: 2px solid #dddddd5c;
-        color: white;
-        border-radius: 3px;
-        transition: all 0.2s;
-
-        padding: 10px;
-        font-size: 1rem;
         width: 100%;
-        background-color: #2c2c2c;
-        transition: border-color 0.3s;
-        outline: none;
-        &:focus {
-            border-color: white;
-        }
     }
 }
+.NumberInput {
+    border: 2px solid #dddddd5c;
+    color: white;
+    border-radius: 3px;
+    transition: all 0.2s;
 
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    background-color: #2c2c2c;
+    transition: border-color 0.3s;
+    outline: none;
+    &:focus {
+        border-color: white;
+    }
+}
 .container {
     display: flex;
     padding: 10px;

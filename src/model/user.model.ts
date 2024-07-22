@@ -61,3 +61,18 @@ export async function getTop5Users() {
         throw err;
     }
 }
+
+export async function SearchUser(query: string) {
+    try {
+        const users = await prisma.user.findMany({
+            where: {
+                name: {
+                    contains: query,
+                },
+            },
+        });
+        return users;
+    } catch (err) {
+        throw err;
+    }
+}
