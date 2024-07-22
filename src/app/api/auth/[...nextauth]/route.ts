@@ -10,7 +10,6 @@ const handler = NextAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
         }),
     ],
-    
     callbacks: {
         async signIn({ account, profile }: any) {
             if (
@@ -18,6 +17,9 @@ const handler = NextAuth({
                 profile.email_verified &&
                 profile.email.endsWith("@dimigo.hs.kr")
             ) {
+                if (profile.email == "seungchanoh0923@dimigo.hs.kr") {
+                    return false;
+                }
                 const user = await getUserByEmail(profile.email);
                 if (!user) {
                     await createUser({
@@ -29,10 +31,6 @@ const handler = NextAuth({
                 return true;
             }
             return false;
-        },
-        async redirect({ url, baseUrl }) {
-            // 로그인 성공 시 리다이렉션할 URL을 설정합니다.
-            return baseUrl; // 기본적으로 홈 페이지로 리다이렉션
         },
     },
 });
