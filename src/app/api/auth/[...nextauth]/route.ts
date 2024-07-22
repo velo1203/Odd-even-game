@@ -29,6 +29,10 @@ const handler = NextAuth({
             }
             return false;
         },
+        async redirect({ url, baseUrl }) {
+            // 로그인 성공 시 리다이렉션할 URL을 설정합니다.
+            return baseUrl; // 기본적으로 홈 페이지로 리다이렉션
+        },
     },
 });
 
