@@ -7,6 +7,7 @@ import PopupWrapper from "./Components/PopupWrapper";
 import Gift from "./Components/Gift";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { signOut } from "next-auth/react";
 
 export default function Home() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -54,6 +55,13 @@ export default function Home() {
                             <p>
                                 <span>{userPoints}</span>개 보유
                             </p>
+                            <button
+                                onClick={() => {
+                                    signOut();
+                                }}
+                            >
+                                로그아웃
+                            </button>
                             <button onClick={openPopup}>선물</button>
                         </div>
                     </div>
