@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import styles from "./Users.module.css";
+import UserTitle from "./UserTitle";
 
 export default function Users() {
     const [users, setUsers] = useState([]);
@@ -51,7 +52,13 @@ export default function Users() {
                                         height={40}
                                     />
                                 </td>
-                                <td>{user.name}</td>
+                                <td className={styles.username}>
+                                    {user.name}
+                                    <UserTitle
+                                        points={user.points}
+                                        stack={user.stack}
+                                    />
+                                </td>
                                 <td>{user.points}</td>
                                 <td>{user.stack}</td>
                             </tr>

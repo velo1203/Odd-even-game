@@ -46,3 +46,7 @@
         font-weight: bold;
     }
 }
+.username span {
+    margin-left: 10px;
+    font-size: 1rem;
+}
