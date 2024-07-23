@@ -17,9 +17,6 @@ const handler = NextAuth({
                 profile.email_verified &&
                 profile.email.endsWith("@dimigo.hs.kr")
             ) {
-                if (profile.email == "seungchanoh0923@dimigo.hs.kr") {
-                    return false;
-                }
                 const user = await getUserByEmail(profile.email);
                 if (!user) {
                     await createUser({
