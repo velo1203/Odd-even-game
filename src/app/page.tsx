@@ -19,6 +19,9 @@ export default function Home() {
     const [number, setNumber] = useState(0); // 배팅 개수
     const [userPoints, setUserPoints] = useState(-1); // 유저 포인트
     const [resNum, setResNum] = useState(0); // 배팅 결과 숫자
+    const [isBetting, setIsBetting] = useState(false); // 배팅 진행 중 상태
+    const [isDebouncing, setIsDebouncing] = useState(false); // debounce 상태
+
     const openPopup = () => setIsPopupOpen(true);
     const closePopup = () => setIsPopupOpen(false);
 
@@ -42,6 +45,13 @@ export default function Home() {
     };
 
     const handleGame = (mode: 0 | 1) => () => {
+        if (isDebouncing) {
+            return;
+        }
+
+        setIsBetting(true); // 배팅 시작
+        setIsDebouncing(true); // debounce 시작
+
         axios
             .post("api/points", { mode, number })
             .then((res) => {
@@ -55,6 +65,10 @@ export default function Home() {
             })
             .catch((err) => {
                 toast.error(err.response.data.error);
+            })
+            .finally(() => {
+                setIsBetting(false); // 배팅 완료
+                setTimeout(() => setIsDebouncing(false), 1000); // 1초 후 debounce 해제
             });
     };
 
@@ -98,7 +112,12 @@ export default function Home() {
                         </div>
                     </div>
                     <div className={styles.container}>
-                        <button onClick={handleGame(1)}>홀</button>
+                        <button
+                            onClick={handleGame(1)}
+                            disabled={isBetting || isDebouncing}
+                        >
+                            홀
+                        </button>
                         <div className={styles.container}>
                             <input
                                 type="number"
@@ -109,7 +128,12 @@ export default function Home() {
                             />
                             <p>개 배팅</p>
                         </div>
-                        <button onClick={handleGame(0)}>짝</button>
+                        <button
+                            onClick={handleGame(0)}
+                            disabled={isBetting || isDebouncing}
+                        >
+                            짝
+                        </button>
                     </div>
                 </div>
                 {user && (
