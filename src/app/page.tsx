@@ -7,6 +7,7 @@ import { Profiler, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import Gift from "./Components/Gift";
+import Notification from "./Components/notification";
 import PopupWrapper from "./Components/PopupWrapper";
 import Profile from "./Components/Profile";
 import Users from "./Components/Users";
@@ -36,7 +37,7 @@ export default function Home() {
             .post("api/bankruptcy")
             .then((res) => {
                 toast.success("보조금을 받았습니다!.");
-                setUserPoints(res.data.points);
+                setUserPoints(5);
             })
             .catch((err) => {
                 toast.error(err.response.data.error);
@@ -73,6 +74,7 @@ export default function Home() {
 
     return (
         <main className={styles.main}>
+            <Notification />
             <PopupWrapper isOpen={isPopupOpen} onClose={closePopup}>
                 <Gift setUserPoints={setUserPoints} />
             </PopupWrapper>
