@@ -43,7 +43,7 @@ export async function editPoints(email: string, points: number) {
     }
 }
 
-export async function getTop5Users() {
+export async function getTopUsers() {
     try {
         const users = await prisma.user.findMany({
             orderBy: {
@@ -54,6 +54,7 @@ export async function getTop5Users() {
                 name: true,
                 picture: true,
                 points: true,
+                stack: true,
             },
         });
         return users;
@@ -82,11 +83,31 @@ export async function GetUserUnder10() {
         const users = await prisma.user.findMany({
             where: {
                 points: {
-                    lt: 10
+                    lt: 10,
                 },
             },
         });
         return users;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function RegenerationUser(email: string) {
+    try {
+        const user = await prisma.user.update({
+            where: {
+                email: email,
+            },
+            data: {
+                points: 10,
+                stack: {
+                    increment: 1,
+                },
+            },
+        });
+
+        return user;
     } catch (err) {
         throw err;
     }

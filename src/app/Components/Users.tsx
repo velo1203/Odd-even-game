@@ -16,7 +16,7 @@ export default function Users() {
     };
 
     useEffect(() => {
-        fetchData(); // 초기 데이터 로드
+        fetchData(); // 초기 데이터 로드`
 
         const interval = setInterval(() => {
             fetchData();
@@ -37,6 +37,7 @@ export default function Users() {
                             <th></th>
                             <th>이름</th>
                             <th>개수</th>
+                            <th>파산스택</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +53,7 @@ export default function Users() {
                                 </td>
                                 <td>{user.name}</td>
                                 <td>{user.points}</td>
+                                <td>{user.stack}</td>
                             </tr>
                         ))}
                     </tbody>

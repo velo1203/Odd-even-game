@@ -14,7 +14,7 @@ export default function Home() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [user, setUser] = useState<any>(null);
     const [number, setNumber] = useState(0); //배팅 개수
-    const [userPoints, setUserPoints] = useState(0); //유저 포인트
+    const [userPoints, setUserPoints] = useState(-1); //유저 포인트
     const [resNum, setResNum] = useState(0); //배팅 결과 숫자
     const openPopup = () => setIsPopupOpen(true);
     const closePopup = () => setIsPopupOpen(false);
@@ -25,6 +25,18 @@ export default function Home() {
             setUserPoints(res.data.points);
         });
     }, [userPoints]);
+
+    const handleRetry = () => {
+        axios
+            .post("api/bankruptcy")
+            .then((res) => {
+                toast.success("보조금을 받았습니다!.");
+                setUserPoints(res.data.points);
+            })
+            .catch((err) => {
+                toast.error(err.response.data.error);
+            });
+    };
 
     const handleGame = (mode: 0 | 1) => () => {
         axios
@@ -55,6 +67,7 @@ export default function Home() {
                         <p>
                             <span>{userPoints}</span>개 보유
                         </p>
+
                         <button onClick={openPopup}>선물</button>
                         <button
                             onClick={() => {
@@ -66,6 +79,12 @@ export default function Home() {
                     </div>
                 )}
 
+                {userPoints == 0 && (
+                    <div className={styles.retry}>
+                        <p>보조금으로 다시 시작해보세요!</p>
+                        <button onClick={handleRetry}>지원받기</button>
+                    </div>
+                )}
                 <div className={styles.background}>
                     <div className={styles.container}>
                         <div className={styles.box}>
