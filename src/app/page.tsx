@@ -101,6 +101,7 @@ export default function Home() {
                         <button onClick={handleRetry}>지원받기</button>
                     </div>
                 )}
+
                 <div className={styles.background}>
                     <div className={styles.container}>
                         <div className={styles.box}>
