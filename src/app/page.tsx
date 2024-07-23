@@ -74,7 +74,6 @@ export default function Home() {
 
     return (
         <main className={styles.main}>
-            <Notification />
             <PopupWrapper isOpen={isPopupOpen} onClose={closePopup}>
                 <Gift setUserPoints={setUserPoints} />
             </PopupWrapper>
