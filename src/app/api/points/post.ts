@@ -1,51 +1,65 @@
 import { getServerSession } from "next-auth";
-import { number } from "prop-types";
 
 import { editPoints, getUserByEmail } from "@/model/user.model";
-const generateRandomNumber = () => {
-    const random = Math.floor(Math.random() * 99) + 1;
-    return random;
-};
+
+const generateRandomNumber = () => Math.floor(Math.random() * 99) + 1;
 
 export async function PostGame(request: Request) {
-    const res = await request.json();
-    const session: any = await getServerSession();
-    if (!session) {
-        return Response.json({ error: "Not authorized" }, { status: 401 });
-    }
-    if (isNaN(res.mode) && (parseInt(res.mode) === 0 || parseInt(res.mode) === 1)) {
-        return Response.json(
-            { error: "비정상적인 접근입니다." },
-            { status: 400 }
-        );
-    }
-    if (res.number <= 0) {
-        return Response.json(
-            { error: "0보다 큰수를 입력하세요" },
-            { status: 400 }
-        );
-    }
-    const user = await getUserByEmail(session.user.email);
-    if (!user) {
-        return Response.json(
-            { error: "유저가 존재하지 않습니다" },
-            { status: 404 }
-        );
-    }
-    if (res.number > user.points) {
-        return Response.json({ error: "개수를 줄여주세요" }, { status: 401 });
-    }
+    try {
+        const res = await request.json();
+        const session: any = await getServerSession();
 
-    let result;
-    let newPoints;
-    const randomNumber = generateRandomNumber();
-    if (randomNumber % 2 === res.mode) { // mode: 0|1
-        newPoints = user.points + res.number;
-        result = "win";
-    } else {
-        newPoints = user.points - res.number;
-        result = "lose";
+        if (!session) {
+            return new Response(JSON.stringify({ error: "Not authorized" }), {
+                status: 401,
+            });
+        }
+
+        const { mode, number } = res;
+        if (![0, 1].includes(parseInt(mode))) {
+            return new Response(
+                JSON.stringify({ error: "비정상적인 접근입니다." }),
+                { status: 400 }
+            );
+        }
+
+        if (number <= 0) {
+            return new Response(
+                JSON.stringify({ error: "0보다 큰수를 입력하세요" }),
+                { status: 400 }
+            );
+        }
+
+        const user = await getUserByEmail(session.user.email);
+        if (!user) {
+            return new Response(
+                JSON.stringify({ error: "유저가 존재하지 않습니다" }),
+                { status: 404 }
+            );
+        }
+
+        if (number > user.points) {
+            return new Response(
+                JSON.stringify({ error: "개수를 줄여주세요" }),
+                { status: 401 }
+            );
+        }
+
+        const randomNumber = generateRandomNumber();
+        const isWin = randomNumber % 2 === mode;
+        const newPoints = isWin ? user.points + number : user.points - number;
+        const result = isWin ? "win" : "lose";
+
+        await editPoints(session.user.email, newPoints);
+
+        return new Response(
+            JSON.stringify({ result, randomNumber, newPoints }),
+            { status: 200 }
+        );
+    } catch (error) {
+        return new Response(
+            JSON.stringify({ error: "서버 에러가 발생했습니다" }),
+            { status: 500 }
+        );
     }
-    editPoints(session.user.email, newPoints);
-    return Response.json({ result: result, randomNumber, newPoints });
 }

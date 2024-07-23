@@ -9,12 +9,7 @@ export async function Gift(request: Request) {
 
         const quantity = res.quantity;
         const email = res.email;
-        if (email == session.user.email) {
-            return new Response(
-                JSON.stringify({ error: "자신에게 선물할 수 없습니다" }),
-                { status: 401 }
-            );
-        }
+
         if (!session || !session.user || !session.user.email) {
             return new Response(
                 JSON.stringify({ error: "유저가 존재하지 않습니다" }),
@@ -22,11 +17,10 @@ export async function Gift(request: Request) {
             );
         }
 
-        const user = await getUserByEmail(session.user.email);
-        if (!user) {
+        if (email === session.user.email) {
             return new Response(
-                JSON.stringify({ error: "유저가 존재하지 않습니다" }),
-                { status: 404 }
+                JSON.stringify({ error: "자신에게 선물할 수 없습니다" }),
+                { status: 401 }
             );
         }
 
@@ -37,14 +31,19 @@ export async function Gift(request: Request) {
             );
         }
 
-        if (quantity > user.points) {
+        // 병렬로 사용자 정보 가져오기
+        const [user, target] = await Promise.all([
+            getUserByEmail(session.user.email),
+            getUserByEmail(email),
+        ]);
+
+        if (!user) {
             return new Response(
-                JSON.stringify({ error: "개수를 줄여주세요" }),
-                { status: 401 }
+                JSON.stringify({ error: "유저가 존재하지 않습니다" }),
+                { status: 404 }
             );
         }
 
-        const target = await getUserByEmail(email);
         if (!target) {
             return new Response(
                 JSON.stringify({ error: "상대방이 존재하지 않습니다" }),
@@ -52,8 +51,18 @@ export async function Gift(request: Request) {
             );
         }
 
-        await editPoints(session.user.email, user.points - quantity);
-        await editPoints(email, target.points + quantity);
+        if (quantity > user.points) {
+            return new Response(
+                JSON.stringify({ error: "개수를 줄여주세요" }),
+                { status: 401 }
+            );
+        }
+
+        // 병렬로 포인트 업데이트
+        await Promise.all([
+            editPoints(session.user.email, user.points - quantity),
+            editPoints(email, target.points + quantity),
+        ]);
 
         return new Response(JSON.stringify({ message: "선물했습니다" }), {
             status: 200,
