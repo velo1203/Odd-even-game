@@ -13,9 +13,11 @@ import styles from "./page.module.css";
 export default function Home() {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [user, setUser] = useState<any>(null);
-    const [number, setNumber] = useState(0); //배팅 개수
-    const [userPoints, setUserPoints] = useState(-1); //유저 포인트
-    const [resNum, setResNum] = useState(0); //배팅 결과 숫자
+    const [number, setNumber] = useState(0); // 배팅 개수
+    const [userPoints, setUserPoints] = useState(-1); // 유저 포인트
+    const [resNum, setResNum] = useState(0); // 배팅 결과 숫자
+    const [isBetting, setIsBetting] = useState(false); // 배팅 진행 중 상태
+
     const openPopup = () => setIsPopupOpen(true);
     const closePopup = () => setIsPopupOpen(false);
 
@@ -39,12 +41,13 @@ export default function Home() {
     };
 
     const handleGame = (mode: 0 | 1) => () => {
+        setIsBetting(true); // 배팅 시작
         axios
             .post("api/points", { mode, number })
             .then((res) => {
                 setResNum(res.data.randomNumber);
                 setUserPoints(res.data.newPoints);
-                if (res.data.result == "win") {
+                if (res.data.result === "win") {
                     toast.success("맞췄습니다!");
                 } else {
                     toast.error("틀렸습니다!");
@@ -52,6 +55,9 @@ export default function Home() {
             })
             .catch((err) => {
                 toast.error(err.response.data.error);
+            })
+            .finally(() => {
+                setIsBetting(false); // 배팅 완료
             });
     };
 
@@ -79,7 +85,7 @@ export default function Home() {
                     </div>
                 )}
 
-                {userPoints == 0 && (
+                {userPoints === 0 && (
                     <div className={styles.retry}>
                         <p>보조금으로 다시 시작해보세요!</p>
                         <button onClick={handleRetry}>지원받기</button>
@@ -93,7 +99,9 @@ export default function Home() {
                         </div>
                     </div>
                     <div className={styles.container}>
-                        <button onClick={handleGame(1)}>홀</button>
+                        <button onClick={handleGame(1)} disabled={isBetting}>
+                            홀
+                        </button>
                         <div className={styles.container}>
                             <input
                                 type="number"
@@ -104,7 +112,9 @@ export default function Home() {
                             />
                             <p>개 배팅</p>
                         </div>
-                        <button onClick={handleGame(0)}>짝</button>
+                        <button onClick={handleGame(0)} disabled={isBetting}>
+                            짝
+                        </button>
                     </div>
                 </div>
             </div>

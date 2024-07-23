@@ -100,7 +100,7 @@ export async function RegenerationUser(email: string) {
                 email: email,
             },
             data: {
-                points: 10,
+                points: 5,
                 stack: {
                     increment: 1,
                 },
