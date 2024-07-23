@@ -81,9 +81,9 @@ input::-webkit-inner-spin-button {
 }
 
 .베타메일 {
-    color: rgb(122, 122, 246);
+    color: red;
 }
 
 .신용불량자 {
-    color: rgb(254, 185, 185);
+    color: goldenrod;
 }
