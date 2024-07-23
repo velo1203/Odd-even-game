@@ -1,0 +1,27 @@
+.profile {
+    color: white;
+    background-color: rgb(43, 43, 43);
+    border: 2px solid rgb(164, 164, 164);
+    display: flex;
+    border-radius: 15px;
+    gap: 20px;
+    padding: 20px 30px;
+}
+
+.img {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    & h1 {
+        font-size: 1.2rem;
+    }
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    & span {
+        color: goldenrod;
+        font-weight: bold;
+    }
+}

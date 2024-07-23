@@ -11,7 +11,7 @@ export default function Users() {
     const fetchData = () => {
         axios.get("/api/points").then((res) => {
             setUsers(res.data);
-            toast.success("갱신했습니다!");
+            toast.info("갱신했습니다!");
         });
     };
 
