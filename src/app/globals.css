@@ -52,7 +52,20 @@ input::-webkit-inner-spin-button {
 .알파메일 {
     animation: rainbow-animation 5s infinite;
 }
-
+.확률조작 {
+    animation: gold-animation 5s infinite;
+}
+@keyframes gold-animation {
+    0% {
+        color: goldenrod;
+    }
+    50% {
+        color: rgb(255, 157, 0);
+    }
+    100% {
+        color: rgb(255, 233, 125);
+    }
+}
 @keyframes rainbow-animation {
     0% {
         color: rgb(255, 55, 55);
