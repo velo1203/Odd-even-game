@@ -12,11 +12,7 @@ const handler = NextAuth({
     ],
     callbacks: {
         async signIn({ account, profile }: any) {
-            if (
-                account.provider === "google" &&
-                profile.email_verified &&
-                profile.email.endsWith("@dimigo.hs.kr")
-            ) {
+            if (account.provider === "google" && profile.email_verified) {
                 const user = await getUserByEmail(profile.email);
                 if (!user) {
                     await createUser({
